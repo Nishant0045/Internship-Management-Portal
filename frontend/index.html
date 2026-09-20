@@ -1,0 +1,7 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>InternHub</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="nav"><h1>Intern<span>Hub</span></h1><div><button class="ghost" onclick="showAuth('login')">Login</button><button onclick="showAuth('register')">Register</button></div></div></header>
+<main><section class="hero"><div><p>CAREER PLATFORM</p><h2>Find your next <span>internship.</span></h2><p>Discover opportunities and track applications from one dashboard.</p></div></section>
+<section class="container"><div class="toolbar"><input id="search" placeholder="Search role, company or skill..."><select id="type"><option value="">All Types</option><option>Software Engineering</option><option>AI & Data Science</option><option>Web Development</option><option>Data Analyst</option></select><button onclick="loadJobs()">Search</button></div><div id="jobs" class="jobs"></div>
+<h2>My Applications</h2><div id="apps"></div></section></main>
+<div id="modal" class="modal hidden"><div class="modalbox"><button class="close" onclick="hideAuth()">×</button><h2 id="authTitle"></h2><form id="authForm"><div id="nameWrap"><input id="name" placeholder="Full name"></div><input id="email" type="email" placeholder="Email" required><input id="password" type="password" placeholder="Password" required><button>Continue</button></form><p id="authMsg"></p></div></div>
+<footer>InternHub • Full Stack Demo</footer><script src="app.js"></script></body></html>

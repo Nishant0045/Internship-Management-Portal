@@ -1,0 +1,6 @@
+const r=require('express').Router();const Internship=require('../models/Internship');const auth=require('../middleware/auth');
+r.get('/',async(req,res)=>{try{const q=req.query.q||'',type=req.query.type||'';const filter={};if(q)filter.$or=[{company:new RegExp(q,'i')},{role:new RegExp(q,'i')},{skills:new RegExp(q,'i')}];if(type)filter.type=type;res.json(await Internship.find(filter).sort({createdAt:-1}))}catch(e){res.status(500).json({message:e.message})}});
+r.post('/',auth,async(req,res)=>{if(req.user.role!=='admin')return res.status(403).json({message:'Admin only'});try{res.status(201).json(await Internship.create({...req.body,postedBy:req.user.id}))}catch(e){res.status(400).json({message:e.message})}});
+r.put('/:id',auth,async(req,res)=>{if(req.user.role!=='admin')return res.status(403).json({message:'Admin only'});try{res.json(await Internship.findByIdAndUpdate(req.params.id,req.body,{new:true}))}catch(e){res.status(400).json({message:e.message})}});
+r.delete('/:id',auth,async(req,res)=>{if(req.user.role!=='admin')return res.status(403).json({message:'Admin only'});try{await Internship.findByIdAndDelete(req.params.id);res.json({message:'Internship deleted'})}catch(e){res.status(400).json({message:e.message})}});
+module.exports=r;
