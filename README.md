@@ -1,5 +1,5 @@
 # InternHub — Internship Management Portal 🎓💼
-
+Live Demo :https://internship-management-portal-2.onrender.com/
 A **complete, deploy-ready full-stack project**: students discover internships and track applications, recruiters post roles and manage applicants through a hiring pipeline, and admins run the whole platform.
 
 **Stack:** React 18 (Vite) · Node.js + Express · MongoDB (Mongoose) · JWT auth · Docker
