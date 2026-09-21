@@ -1,0 +1,20 @@
+# One-click deploy on Render (single web service + free MongoDB via Atlas).
+# 1. Create a free MongoDB Atlas cluster and copy the connection string.
+# 2. Push this repo to GitHub, then "New + -> Blueprint" and select render.yaml.
+services:
+  - type: web
+    name: internhub
+    runtime: node
+    plan: free
+    buildCommand: "cd frontend && npm ci && npm run build && cd ../backend && npm ci --omit=dev && cp -r ../frontend/dist ./public"
+    startCommand: "cd backend && node server.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false # paste your Atlas URI in the Render dashboard
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        value: https://internhub.onrender.com # change after first deploy
+    healthCheckPath: /api/health

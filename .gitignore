@@ -1,0 +1,9 @@
+node_modules/
+.env
+.DS_Store
+*.log
+backend/uploads/resumes/*
+backend/uploads/avatars/*
+!backend/uploads/resumes/.gitkeep
+!backend/uploads/avatars/.gitkeep
+frontend/dist/

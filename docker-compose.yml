@@ -1,0 +1,30 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: internhub-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  app:
+    build: .
+    container_name: internhub-app
+    restart: unless-stopped
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongo:27017/internhub
+      - JWT_SECRET=${JWT_SECRET:-change-me-in-production}
+      - FRONTEND_URL=http://localhost:5000
+    ports:
+      - "5000:5000"
+    volumes:
+      - uploads-data:/app/backend/uploads
+
+volumes:
+  mongo-data:
+  uploads-data:
